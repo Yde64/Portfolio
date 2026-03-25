@@ -1,0 +1,95 @@
+---
+const navLinks = [
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
+];
+---
+
+<nav
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="mx-auto flex max-w-content items-center justify-between px-6 py-4">
+    <a href="/" class="font-mono text-accent text-lg font-bold no-underline hover:no-underline">
+      M
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map(({ label, href }) => (
+        <a
+          href={href}
+          class="font-mono text-sm text-text-muted hover:text-accent no-underline transition-colors"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile hamburger (CSS-only) -->
+    <input type="checkbox" id="menu-toggle" class="hidden" />
+    <label
+      for="menu-toggle"
+      class="md:hidden flex flex-col gap-1.5 cursor-pointer z-50"
+      aria-label="Toggle menu"
+    >
+      <span class="hamburger-bar block h-0.5 w-6 bg-text-primary transition-transform" />
+      <span class="hamburger-bar block h-0.5 w-6 bg-text-primary transition-opacity" />
+      <span class="hamburger-bar block h-0.5 w-6 bg-text-primary transition-transform" />
+    </label>
+
+    <!-- Mobile overlay -->
+    <div id="menu-overlay" class="fixed inset-0 bg-bg-primary/95 flex items-center justify-center opacity-0 pointer-events-none transition-opacity md:hidden">
+      <div class="flex flex-col items-center gap-8">
+        {navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            class="font-mono text-lg text-text-heading hover:text-accent no-underline"
+            onclick="document.getElementById('menu-toggle').checked = false"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Hamburger animation via sibling selector */
+  #menu-toggle:checked ~ label .hamburger-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  #menu-toggle:checked ~ label .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle:checked ~ label .hamburger-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  #menu-toggle:checked ~ #menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const nav = document.getElementById("nav");
+    const hero = document.getElementById("hero");
+    if (!nav || !hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          nav.classList.add("bg-bg-primary/80", "backdrop-blur-md", "shadow-lg");
+        } else {
+          nav.classList.remove("bg-bg-primary/80", "backdrop-blur-md", "shadow-lg");
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(hero);
+  });
+</script>
