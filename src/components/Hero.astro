@@ -1,0 +1,25 @@
+---
+import HeroBackground from "./HeroBackground.tsx";
+---
+
+<section id="hero" class="relative min-h-screen flex items-center">
+  <HeroBackground client:load />
+  <div class="relative z-10 mx-auto max-w-content px-6">
+    <p class="font-mono text-accent mb-4">Hi, my name is</p>
+    <h1 class="text-5xl md:text-7xl font-bold mb-4">Morten.</h1>
+    <h2 class="text-3xl md:text-5xl font-bold text-text-muted mb-6">
+      I build things that work.
+    </h2>
+    <p class="max-w-lg text-text-muted text-lg leading-relaxed mb-8">
+      Software engineer with a passion for full-stack development, embedded
+      systems, and DevOps. I enjoy building reliable systems from hardware
+      to cloud.
+    </p>
+    <a
+      href="#projects"
+      class="inline-block font-mono text-accent border border-accent rounded px-6 py-3 hover:bg-accent-muted no-underline transition-colors"
+    >
+      See my work
+    </a>
+  </div>
+</section>
