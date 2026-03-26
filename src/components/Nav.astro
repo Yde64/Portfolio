@@ -12,8 +12,8 @@ const navLinks = [
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
 >
   <div class="mx-auto flex max-w-content items-center justify-between px-6 py-4">
-    <a href="/" class="font-mono text-accent text-lg font-bold no-underline hover:no-underline">
-      M
+    <a href="/" class="nav-logo font-mono text-accent text-sm no-underline hover:no-underline flex items-center" aria-label="Home">
+      <span class="text-text-muted">$</span>&nbsp;<span class="logo-text"></span><span class="logo-cursor">▌</span>
     </a>
 
     <!-- Desktop links -->
@@ -72,10 +72,37 @@ const navLinks = [
     opacity: 1;
     pointer-events: auto;
   }
+
+  .logo-cursor {
+    animation: blink 1s step-end infinite;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 </style>
 
 <script>
   document.addEventListener("astro:page-load", () => {
+    // Terminal typing animation for logo
+    const logoText = document.querySelector(".logo-text");
+    if (logoText && !logoText.textContent) {
+      const name = "morten/yde/sloth/christensen";
+      let i = 0;
+      const type = () => {
+        if (i < name.length) {
+          logoText.textContent += name[i];
+          i++;
+          setTimeout(type, 80 + Math.random() * 60);
+        }
+      };
+      setTimeout(type, 500);
+    }
+
     const nav = document.getElementById("nav");
     const hero = document.getElementById("hero");
     if (!nav || !hero) return;

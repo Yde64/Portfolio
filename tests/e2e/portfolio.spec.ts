@@ -17,7 +17,7 @@ test.describe("Portfolio", () => {
 
   test("project detail page loads", async ({ page }) => {
     await page.goto("/projects/indoor-climate");
-    await expect(page.locator("h1")).toContainText("Indoor Climate");
+    await expect(page.locator("main h1").first()).toContainText("Indoor Climate");
     await expect(
       page.getByRole("link", { name: "Back to projects" }),
     ).toBeVisible();
@@ -25,7 +25,7 @@ test.describe("Portfolio", () => {
 
   test("404 page renders", async ({ page }) => {
     await page.goto("/nonexistent");
-    await expect(page.locator("h1")).toContainText("404");
+    await expect(page.locator("main h1").first()).toContainText("404");
   });
 
   test("responsive: mobile nav toggle works", async ({ page }) => {
