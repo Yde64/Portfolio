@@ -982,7 +982,7 @@ Create `src/components/Contact.astro`:
     </a>
     <div class="flex justify-center gap-6 mt-8">
       <a
-        href="https://github.com/morten"
+        href="https://github.com/Yde64"
         target="_blank"
         rel="noopener noreferrer"
         class="text-text-muted hover:text-accent no-underline transition-colors"
@@ -991,7 +991,7 @@ Create `src/components/Contact.astro`:
         GitHub
       </a>
       <a
-        href="https://linkedin.com/in/morten"
+        href="www.linkedin.com/in/morten-yde-christensen"
         target="_blank"
         rel="noopener noreferrer"
         class="text-text-muted hover:text-accent no-underline transition-colors"

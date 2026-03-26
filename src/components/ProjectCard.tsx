@@ -6,7 +6,7 @@ interface Props {
   description: string;
   tags: string[];
   image: string;
-  github: string;
+  github?: string;
   live?: string;
   slug: string;
 }
@@ -89,15 +89,17 @@ export default function ProjectCard({
             ))}
           </div>
           <div className="flex gap-4">
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-accent text-sm no-underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
-              GitHub
-            </a>
+            {github && (
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-accent text-sm no-underline transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                GitHub
+              </a>
+            )}
             {live && (
               <a
                 href={live}
