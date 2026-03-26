@@ -1,0 +1,66 @@
+---
+const experiences = [
+  {
+    company: "Trelleborg Marine & Infrastructure",
+    role: "Software Engineer",
+    type: "Full-time",
+    period: "Jul 2025 — Present",
+    location: "Aarhus, Denmark",
+    skills: ["iOS", "C++", "Swift", "Embedded", "DevOps"],
+  },
+  {
+    company: "Magnatek",
+    role: "Embedded Software Developer",
+    type: "Full-time",
+    period: "Sep 2022 — Jul 2025",
+    location: "Denmark",
+    skills: ["Zephyr", "CANopen", "C", "Embedded Linux", "RTOS"],
+  },
+  {
+    company: "DIS/CREADIS",
+    role: "Electric Engineering Student Worker",
+    type: "Part-time",
+    period: "Jul 2021 — Sep 2022",
+    location: "Denmark",
+    skills: ["Technical Documentation", "Software Design", "Testing"],
+  },
+  {
+    company: "DIS/CREADIS",
+    role: "Electrical Engineering Intern",
+    type: "Internship",
+    period: "Feb 2021 — Jul 2021",
+    location: "Skanderborg, Denmark",
+    skills: ["Embedded Systems", "Documentation"],
+  },
+];
+---
+
+<section id="experience" class="py-24">
+  <div class="mx-auto max-w-content px-6">
+    <h2 class="text-2xl font-bold mb-12">
+      <span class="font-mono text-accent text-lg font-normal mr-2">02.</span>
+      Experience
+    </h2>
+    <div class="space-y-8">
+      {experiences.map((exp) => (
+        <div class="group relative grid grid-cols-[120px_1fr] md:grid-cols-[180px_1fr] gap-4">
+          <p class="font-mono text-sm text-text-muted pt-1">{exp.period.split("—")[0].trim()}</p>
+          <div>
+            <h3 class="text-text-heading font-semibold leading-tight">
+              {exp.role}
+              <span class="text-text-muted font-normal"> · {exp.company}</span>
+            </h3>
+            <p class="font-mono text-xs text-text-muted mt-1">{exp.type} · {exp.location}</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              {exp.skills.map((skill) => (
+                <span class="font-mono text-xs text-accent bg-accent-muted px-2 py-1 rounded">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
