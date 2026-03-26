@@ -1,0 +1,74 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  github: string;
+  live?: string;
+}
+
+const { title, description, tags, image, github, live } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Morten`} description={description} image={image}>
+  <article class="py-24">
+    <div class="mx-auto max-w-content px-6">
+      <!-- Back link -->
+      <a
+        href="/#projects"
+        class="inline-block font-mono text-sm text-accent mb-8 no-underline hover:underline"
+      >
+        &larr; Back to projects
+      </a>
+
+      <!-- Hero -->
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
+      />
+
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+      <p class="text-text-muted text-lg mb-6">{description}</p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        {tags.map((tag) => (
+          <span class="font-mono text-xs text-accent bg-accent-muted px-2 py-1 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Links -->
+      <div class="flex gap-4 mb-12">
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm text-accent border border-accent rounded px-4 py-2 hover:bg-accent-muted no-underline transition-colors"
+        >
+          View on GitHub
+        </a>
+        {live && (
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm text-accent border border-accent rounded px-4 py-2 hover:bg-accent-muted no-underline transition-colors"
+          >
+            Live Demo
+          </a>
+        )}
+      </div>
+
+      <!-- Markdown content -->
+      <div class="prose prose-invert prose-lg max-w-[65ch] prose-a:text-accent prose-code:font-mono">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

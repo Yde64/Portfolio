@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from "astro:content";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).sort(
+    (a, b) => a.data.order - b.data.order
+  );
+
+  return projects.map((project, index) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: index > 0 ? projects[index - 1] : null,
+      next: index < projects.length - 1 ? projects[index + 1] : null,
+    },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
+---
+
+<ProjectLayout
+  title={project.data.title}
+  description={project.data.description}
+  tags={project.data.tags}
+  image={project.data.image}
+  github={project.data.github}
+  live={project.data.live}
+>
+  <Content />
+
+  <!-- Prev/Next navigation -->
+  <nav class="flex justify-between mt-16 pt-8 border-t border-text-muted/10">
+    {prev ? (
+      <a
+        href={`/projects/${prev.id}`}
+        class="font-mono text-sm text-text-muted hover:text-accent no-underline"
+      >
+        &larr; {prev.data.title}
+      </a>
+    ) : <span />}
+    {next ? (
+      <a
+        href={`/projects/${next.id}`}
+        class="font-mono text-sm text-text-muted hover:text-accent no-underline"
+      >
+        {next.data.title} &rarr;
+      </a>
+    ) : <span />}
+  </nav>
+</ProjectLayout>
