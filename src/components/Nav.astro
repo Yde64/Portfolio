@@ -82,9 +82,13 @@ const navLinks = [
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) {
-          nav.classList.add("bg-bg-primary/80", "backdrop-blur-md", "shadow-lg");
+          nav.style.backgroundColor = "rgba(10, 25, 47, 0.8)";
+          nav.style.backdropFilter = "blur(12px)";
+          nav.style.boxShadow = "0 10px 30px -10px rgba(2, 12, 27, 0.7)";
         } else {
-          nav.classList.remove("bg-bg-primary/80", "backdrop-blur-md", "shadow-lg");
+          nav.style.backgroundColor = "";
+          nav.style.backdropFilter = "";
+          nav.style.boxShadow = "";
         }
       },
       { threshold: 0.5 }

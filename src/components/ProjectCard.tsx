@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -31,9 +31,17 @@ export default function ProjectCard({
   slug,
 }: Props) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setPrefersReducedMotion(
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }, []);
+
   function handleMouseMove(e: React.MouseEvent) {
+    if (prefersReducedMotion) return;
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     const mouseX = e.clientX - rect.left;
@@ -63,6 +71,7 @@ export default function ProjectCard({
           src={image}
           alt={title}
           className="w-full h-48 object-cover"
+          style={{ viewTransitionName: `project-image-${slug}` }}
         />
         <div className="p-6">
           <h3 className="text-text-heading text-xl font-bold mb-2">{title}</h3>
