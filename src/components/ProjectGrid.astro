@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.tsx";
+
+const projects = (await getCollection("projects"))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="py-24">
+  <div class="mx-auto max-w-content px-6">
+    <h2 class="text-2xl font-bold mb-12">
+      <span class="font-mono text-accent text-lg font-normal mr-2">02.</span>
+      Projects
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {projects.map((project) => (
+        <ProjectCard
+          client:visible
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          image={project.data.image}
+          github={project.data.github}
+          live={project.data.live}
+          slug={project.id}
+        />
+      ))}
+    </div>
+  </div>
+</section>
