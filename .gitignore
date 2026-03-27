@@ -13,6 +13,9 @@ yarn-error.log*
 pnpm-debug.log*
 
 
+# cdk build output
+infra/cdk.out/
+
 # environment variables
 .env
 .env.production

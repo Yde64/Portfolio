@@ -991,7 +991,7 @@ Create `src/components/Contact.astro`:
         GitHub
       </a>
       <a
-        href="www.linkedin.com/in/morten-yde-christensen"
+        href="https://www.linkedin.com/in/morten-yde-christensen"
         target="_blank"
         rel="noopener noreferrer"
         class="text-text-muted hover:text-accent no-underline transition-colors"

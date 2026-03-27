@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://morten.dev",
+  site: "https://mortenysc.com",
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
